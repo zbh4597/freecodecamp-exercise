@@ -7,7 +7,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/whoami', function(req, res) {
-    var ipaddress = req.connection.remoteAddress;
+    var ipaddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     var language = req.headers['accept-language'].split(',')[0];
     var userAgent = req.headers['user-agent'];
     var indexOfFirstBracket = userAgent.indexOf('(');
