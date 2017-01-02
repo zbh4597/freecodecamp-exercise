@@ -11,13 +11,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.set('port', (process.env.PORT || 5000));
-
 app.use(express.static(path.join(__dirname, 'public')));
 
-var teams = require('./routes/time');
+// var time = require('./routes/time');
 var whoami = require('./routes/whoami');
-app.use('/api/time', time);
+// app.use('/api/time', time);
 app.use('/api/whoami', whoami);
 
 app.use(function(req, res, next) {
