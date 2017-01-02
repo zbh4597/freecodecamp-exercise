@@ -13,9 +13,9 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// var time = require('./routes/time');
+var time = require('./routes/time');
 var whoami = require('./routes/whoami');
-// app.use('/api/time', time);
+app.use('/api/time', time);
 app.use('/api/whoami', whoami);
 
 app.use(function(req, res, next) {

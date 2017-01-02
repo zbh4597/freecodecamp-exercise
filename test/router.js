@@ -18,4 +18,32 @@ describe('router testing', function() {
                 done();
             });
     });
+
+    it('unix time', function(done) {
+        request(app)
+            .get('/api/time/1450108800000')
+            .expect('Content-Type', 'application/json; charset=utf-8')
+            .expect(200)
+            .end(function(err, res) {
+                if (err) throw err;
+                var resJson = JSON.parse(res.text);
+                should.equal(resJson.unix, 1450108800000);
+                should.equal(resJson.natural, 'December 15, 2015');
+                done();
+            });
+    });
+
+    it('natural time', function(done) {
+        request(app)
+            .get('/api/time/December 15, 2015')
+            .expect('Content-Type', 'application/json; charset=utf-8')
+            .expect(200)
+            .end(function(err, res) {
+                if (err) throw err;
+                var resJson = JSON.parse(res.text);
+                should.equal(resJson.unix, 1450108800000);
+                should.equal(resJson.natural, 'December 15, 2015');
+                done();
+            });
+    });
 });
