@@ -1,25 +1,46 @@
 var express = require('express');
-var app = express();
 var path = require('path');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var app = express();
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api/whoami', function(req, res) {
-    var ipaddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    var language = req.headers['accept-language'].split(',')[0];
-    var userAgent = req.headers['user-agent'];
-    var indexOfFirstBracket = userAgent.indexOf('(');
-    var software = userAgent.substring(indexOfFirstBracket + 1, userAgent.indexOf(')', indexOfFirstBracket));
+var teams = require('./routes/time');
+var whoami = require('./routes/whoami');
+app.use('/api/time', time);
+app.use('/api/whoami', whoami);
 
-    res.json({
-        ipaddress: ipaddress,
-        language: language,
-        software: software
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.send({
+            message: err.message,
+            error: err
+        });
     });
+}
+
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
 });
 
-app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'));
-});
+// app.listen(app.get('port'), function() {
+//     console.log('Node app is running on port', app.get('port'));
+// });
+module.exports = app;

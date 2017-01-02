@@ -1,22 +1,31 @@
 {
-    "name": "freecodecamp-exercise",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "test": "node test.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zbh4597/freecodecamp-exercise.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/zbh4597/freecodecamp-exercise/issues"
-    },
-    "homepage": "https://github.com/zbh4597/freecodecamp-exercise#readme",
-    "dependencies": {
-        "express": "^4.14.0"
-    }
+  "name": "freecodecamp-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbh4597/freecodecamp-exercise.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbh4597/freecodecamp-exercise/issues"
+  },
+  "homepage": "https://github.com/zbh4597/freecodecamp-exercise#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "should": "^11.1.2",
+    "supertest": "^2.0.1"
+  }
 }
